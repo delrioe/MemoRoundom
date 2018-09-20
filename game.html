@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang = "en">
+    
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "main.css">
+        <script type = "text/javascript">
+           
+            var userPattern = [];
+            var numCircles = 5;
+            var number = 0;
+            var rounds = 0; //Number of rounds played
+            var currentRound = 0; //The screen they're on
+            var referenceNumbers = ["zero,","one","two","three","four","five","six","seven","eight","nine","ten"];
+            function resetGame() {
+            userPattern = [];
+            numCircles = 5;
+            number = 0;
+            rounds = 0; //Number of rounds played
+            currentRound = 0; //The screen they're on
+            referenceNumbers = ["zero,","one","two","three","four","five","six","seven","eight","nine","ten"];
+            
+            for (var i = 1; i < 11; i++) {
+                document.getElementById(referenceNumbers[i]).style.visibility="visible";
+            }
+            document.getElementById("newCircleDisplay").style.visibility="visible";
+            document.getElementById("roundDisplay").innerHTML = "Rounds:";
+            document.getElementById("phaseDispaly").innerHTML = "Phase:";
+            
+            }
+        //Takes user input, tests whether to add to pattern or check against pattern
+            function circlePress(number) {
+                //Check if first round/picking new pattern round
+                if (rounds == currentRound) {
+                    firstRound(number);
+                    mixCircles(userPattern[0]);
+                    document.getElementById("roundDisplay").innerHTML = "Round: " + rounds;
+                    return 0;
+                } else {
+                //Check if pattern is correct
+                    if (number == userPattern[currentRound]) {
+                        currentRound++;
+                        mixCircles(userPattern[currentRound]);
+                        if (rounds == currentRound){
+                        document.getElementById("newCircleDisplay").style.visibility="visible";
+                        }
+                        return 0;
+                    } else {
+                        alert("Game Over: " + rounds);
+                        resetGame();
+                        return false;
+                    }
+                }
+            }
+                
+            //Called when user reaches the end of the pattern.
+            //Takes in a circle and adds it to the pattern.
+            function firstRound(number) {
+                userPattern.push(number);
+                rounds++;
+                currentRound = 0;
+                document.getElementById("newCircleDisplay").style.visibility="hidden";
+            }
+            
+            //Randomly select 5 circles to display in next round
+            function mixCircles(correctCircle) {
+                
+                
+                document.getElementById("phaseDispaly").innerHTML = "Phase: " + (currentRound + 1);
+                var toDisplay = [];
+                var tenNumbers = ["one","two","three","four","five","six","seven","eight","nine","ten"];
+                var correctCircleLetters = referenceNumbers[correctCircle];
+                for (var i = 10; i > 0; i--){
+                randomNumber = Math.floor((Math.random() * i));
+                toDisplay.push(tenNumbers[randomNumber]);
+                tenNumbers.splice(randomNumber, 1);
+                }
+                
+                if (toDisplay.indexOf(correctCircleLetters) > 4) {
+                    random5 = Math.floor(Math.random() * 4);
+                    toDisplay[random5] = correctCircleLetters;
+                }
+                
+                console.log(toDisplay);
+                displayCircles(toDisplay);
+            }
+            
+            //Hides all current circles, and displays 5 circles for the next round
+            function displayCircles(toDisplay) {
+                
+                for (var i = 1; i < 11; i++) {
+                    document.getElementById(referenceNumbers[i]).style.visibility="hidden";
+                }
+                
+                for (var i = 0; i < 5; i ++) {
+                    //toDisplay[i].toString();
+                    var toPass = "\"" + toDisplay[i] + "\"";
+                    console.log(toPass);
+                    document.getElementById(toDisplay[i]).style.visibility="visible";
+                }
+                
+            }
+            
+            
+            
+            
+        </script>
+    </head>
+
+    <body>
+        <header>
+        <div id = "intro">
+            <br>
+            <h1 id = "welcome" align = "center">Welcome to MemoRoundom</h1>
+            <p align = "center">Remember your pattern as you build it!</p><br>
+            </div>
+        </header>
+        
+<br>
+        
+        <div id = "game">
+            <div id ="first5">
+            <img src = "images/1.png" onclick = "circlePress(1)" class = "circles" id = "one">
+            <img src = "images/2.png" onclick = "circlePress(2)" class = "circles" id = "two">
+            <img src = "images/3.png" onclick = "circlePress(3)" class = "circles" id = "three">
+            <img src = "images/4.png" onclick = "circlePress(4)" class = "circles" id = "four">
+            <img src = "images/5.png" onclick = "circlePress(5)" class = "circles" id = "five">
+            </div>
+            <div id = "second5">
+            <img src = "images/6.png" onclick = "circlePress(6)" class = "circles" id = "six">
+            <img src = "images/7.png" onclick = "circlePress(7)" class = "circles" id = "seven">
+            <img src = "images/8.png" onclick = "circlePress(8)" class = "circles" id = "eight">
+            <img src = "images/9.png" onclick = "circlePress(9)" class = "circles" id = "nine">
+            <img src = "images/10.png" onclick = "circlePress(10)" class = "circles" id = "ten">
+            </div>
+        </div>
+        
+        <div id = "helpCard">
+            <table align = "center">
+                <tr>
+                    <td id = "roundDisplay">Round: </td>
+                    <td id = "phaseDispaly">Phase: </td>
+                    <td id = "newCircleDisplay" align = "center">SELECT NEW CIRCLE</td>
+                </tr>
+            </table>
+        <p align = "center"><b>HOW TO PLAY:</b><br>Select a new circle at the end of each round.<br>Enter your pattern at the beginning of each round.</p>
+        </div>        
+    </body>
+    
+</html>

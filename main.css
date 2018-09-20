@@ -1,0 +1,76 @@
+html {
+}
+img.circles {
+    
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+h1 {
+    margin-top: 0;
+}
+
+body {
+    font-size: 16pt;
+    margin: auto;
+    background-color: #777777;
+}
+#game {
+    overflow: auto;
+    margin: auto;
+    background-color: #DEAB7F;
+    border-radius: 25px;
+    max-width: 750px;
+    border-width: 20px;
+    border-color: #555555;
+    border-style: solid;
+}
+table {
+    font-size: 20pt;
+}
+td {
+    width: 200px;
+}
+header {
+    background-color: white;
+}
+#intro {
+    margin: auto;
+}
+#one {
+    visibility: visible;
+}
+#two {
+    visibility: visible;
+    
+}
+#three {
+    visibility: visible;
+}
+#four {
+    visibility: visible;
+}
+#five {
+    visibility: visible;
+}
+#six {
+    visibility: visible;
+}
+#seven {
+    visibility: visible;
+}
+#eight {
+    visibility: visible;
+}
+#nine {
+    visibility: visible;
+}
+#ten {
+    visibility: visible;
+}
+#helpCard {
+    color: white;
+}
+#newCircleDisplay {
+    color: lightgreen;
+}
